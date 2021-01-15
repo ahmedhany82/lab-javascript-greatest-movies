@@ -146,8 +146,6 @@ function bestYearAvg(movies) {
       yearRate[year] = ratesAverage(yearMovies);
     }
 
-    console.log(yearRate);
-
     let maxAvgRate = 0;
     let bestYear = '';
     for(let year in yearRate) {
