@@ -1,18 +1,14 @@
 // Iteration 1: All directors? - Get the array of all directors.
-// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors. How could you "clean" a bit this array and make it unified (without duplicates)?
+// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors. How could you "clean" a bit this array and make it unified (without duplicates)? 
 
 function getAllDirectors(movies) {
 
     const directorsArray = movies.map(function(movie) {
         return movie.director;
     })
-    return directorsArray;
+    const uniqueDirectors = [...new Set(directorsArray)];
+    return uniqueDirectors;
 }
-
-
-
-//BONUS 
-
 
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
@@ -63,13 +59,40 @@ function orderByYear(movies) {
     if(movies.length === 0) {
         return [];
     }
-    const sorted = movies.sort(function(movie1, movie2) {
+    /* const sorted = movies.sort(function(movie1, movie2) {
         return movie1.year - movie2.year;
+    }) */
+    const sorted = movies.sort(function(movie1, movie2) {
+        if (movie1.year > movie2.year) {
+            return 1;
+        }
+        if (movie1.year < movie2.year) {
+            return -1;
+        }
+        if (movie1.year === movie2.year) {
+            //return 0;
+            return (movie1.title.localeCompare(movie2.title));
+        }
     })
     return sorted;
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
+
+function orderAlphabetically(movies) {
+    
+    const dummyarray = movies.slice();
+    const sorted = dummyarray.sort(function(movie1, movie2) {
+        return (movie1.title.localeCompare(movie2.title));
+    })
+    const first20Movies = sorted.slice(0,20);
+
+    const titles = first20Movies.map(function(movie) {
+        return movie.title;
+    })
+
+    return titles;
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
