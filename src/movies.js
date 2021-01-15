@@ -129,13 +129,16 @@ function bestYearAvg(movies) {
     if(movies.length === 0) {
         return null;
     }
-
+    
+    /* create an array of all the years */
     let yearsArray = movies.map(function(movie) {
         return movie.year;
     })
 
+    /* remove duplicates */
     yearsArray = [...new Set(yearsArray)];
 
+    /* create an object with property: year and value: average rating */
     const yearRate = {}
 
     for(year of yearsArray) {
@@ -143,9 +146,11 @@ function bestYearAvg(movies) {
       let yearMovies = movies.filter(function(movie) {
         return (movie.year === year)
       })
+      /* calculate the average per year */
       yearRate[year] = ratesAverage(yearMovies);
     }
 
+    /* find max average rating */
     let maxAvgRate = 0;
     let bestYear = '';
     for(let year in yearRate) {
